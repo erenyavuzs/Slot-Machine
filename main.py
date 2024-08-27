@@ -35,14 +35,17 @@ def get_slot_machine_spin(rows, cols, symbols):
 
 
 def print_slot_machine(columns):
+    symbol_width = max(len(symbol) for column in columns for symbol in column)
+
     for row in range(len(columns[0])):
         for i, column in enumerate(columns):
             if i != len(columns) - 1:
-                print(column[row], end=" | ")
+                print(column[row].center(symbol_width), end=" | ")
             else:
-                print(column[row], end="")
+                print(column[row].center(symbol_width), end="")
 
         print()
+
             
             
 
