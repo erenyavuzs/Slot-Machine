@@ -13,6 +13,29 @@ symbol_count= {
     "cherries": 6,
     "lemon": 8
 }
+symbol_value= {
+    "7": 5,
+    "BAR": 4,
+    "cherries": 3,
+    "lemon": 2
+}
+
+
+def check_winnings(columns, lines, bet, values):
+    winnings = 0
+    winning_lines = []
+    for line in range(lines):
+        symbol = columns[0][line]
+        for column in columns:
+            symbol_to_check = column[line]
+            if symbol != symbol_to_check:
+                break
+        else:
+            winnings += values[symbol] * bet
+            winning_lines.append(line + 1)
+    
+    return winnings, winning_lines
+
 
 def get_slot_machine_spin(rows, cols, symbols):
     all_symbols = []
@@ -46,10 +69,7 @@ def print_slot_machine(columns):
 
         print()
 
-            
-            
-
-            
+                                
 def deposit():
     while True:
         amount = input("\nWhat would you like to deposit? $")
@@ -67,7 +87,7 @@ def deposit():
 
 def get_number_of_lines():
     while True:
-        lines = input("Enter the number of lines to bet on (1-" + str(MAX_LINES) + ")? ")
+        lines = input("\nEnter the number of lines to bet on (1-" + str(MAX_LINES) + ")? ")
         if lines.isdigit():
             lines = int(lines)
             if 1 <= lines <= MAX_LINES:
@@ -112,6 +132,9 @@ def main():
 
     slots = get_slot_machine_spin(ROWS, COLS, symbol_count)
     print_slot_machine(slots)
+    winnings, winning_lines = check_winnings(slots, lines, bet, symbol_value)
+    print(f"\nYou won ${winnings} !")
+    print(f"You won on lines:\n", *winning_lines)
 
 
 main()
