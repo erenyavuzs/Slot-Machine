@@ -13,6 +13,7 @@ symbol_count= {
     "cherries": 6,
     "lemon": 8
 }
+
 symbol_value= {
     "7": 5,
     "BAR": 4,
@@ -115,8 +116,7 @@ def get_bet():
     return amount
     
 
-def main():
-    balance = deposit()
+def spin(balance):
     lines = get_number_of_lines()
     while True:
         bet = get_bet()
@@ -135,6 +135,20 @@ def main():
     winnings, winning_lines = check_winnings(slots, lines, bet, symbol_value)
     print(f"\nYou won ${winnings} !")
     print(f"You won on lines:\n", *winning_lines)
+    return winnings - total_bet
+
+
+def main():
+    balance = deposit()
+    while True:
+        print(f"Current balance is ${balance}")
+        answer = input ("Press enter to play (q to quit).")
+        if answer == "q":
+            break
+        balance += spin(balance)
+
+    print(f"\nYou left with ${balance} good bye !") 
+
 
 
 main()
