@@ -15,10 +15,10 @@ symbol_count= {
 }
 
 symbol_value= {
-    "7": 5,
-    "BAR": 4,
-    "cherries": 3,
-    "lemon": 2
+    "7": 7,
+    "BAR": 6,
+    "cherries": 5,
+    "lemon": 4
 }
 
 
@@ -44,7 +44,7 @@ def get_slot_machine_spin(rows, cols, symbols):
         for _ in range(symbol_count):
             all_symbols.append(symbol)
 
-    colums = []
+    columns = []
     for col in range(cols):
         column = []
         current_symbols = all_symbols[:]
@@ -53,9 +53,9 @@ def get_slot_machine_spin(rows, cols, symbols):
             current_symbols.remove(value)
             column.append(value)
 
-        colums.append(column)
+        columns.append(column)
 
-    return colums
+    return columns
 
 
 def print_slot_machine(columns):
@@ -124,7 +124,7 @@ def spin(balance):
         
         if total_bet > balance:
             print(
-                f"You do not have enough to bet that amount, your cureent balance is: ${balance}")
+                f"You do not have enough to bet that amount, your current balance is: ${balance}")
         else:
             break
 
