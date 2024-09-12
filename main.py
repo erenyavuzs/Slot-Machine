@@ -70,7 +70,7 @@ def print_slot_machine(columns):
 
         print()
 
-                                
+
 def deposit():
     while True:
         amount = input("\nWhat would you like to deposit? $")
@@ -103,7 +103,9 @@ def get_number_of_lines():
 
 def get_bet():
     while True:
-        amount = input("\nWhat would you like to bet on each line? $")
+        amount = input("\nWhat would you like to bet on each line? $ (or 'q' to quit). ")
+        if amount.lower() == 'q':
+            return None
         if amount.isdigit():
             amount = int(amount)
             if MIN_BET <= amount <= MAX_BET:
@@ -120,6 +122,8 @@ def spin(balance):
     lines = get_number_of_lines()
     while True:
         bet = get_bet()
+        if bet is None:
+            return 0
         total_bet = bet * lines
         
         if total_bet > balance:
@@ -142,12 +146,12 @@ def main():
     balance = deposit()
     while True:
         print(f"Current balance is ${balance}")
-        answer = input ("Press enter to play (q to quit).")
+        answer = input ("Press enter to play, (q to quit). ")
         if answer == "q":
             break
         balance += spin(balance)
 
-    print(f"\nYou left with ${balance} good bye !") 
+    print(f"\nYou left with ${balance} good bye !\n") 
 
 
 
